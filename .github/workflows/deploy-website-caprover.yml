@@ -46,6 +46,4 @@ jobs:
             --host "$CAPROVER_SERVER_URL" \
             --appToken "$CAPROVER_WEBSITE_APP_TOKEN" \
             --appName "site-cezarpretto-dev" \
-            --tarFile website-deploy.tar \
-            --imageName="site-cezarpretto-dev:${{ github.sha }}" \
-            --envVars="{\"NEXT_PUBLIC_WHATSAPP_NUMBER\":\"$NEXT_PUBLIC_WHATSAPP_NUMBER\"}"
+            --tarFile website-deploy.tar
