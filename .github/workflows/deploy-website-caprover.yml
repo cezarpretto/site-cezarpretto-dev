@@ -23,21 +23,29 @@ jobs:
       - name: Install CapRover CLI
         run: npm install -g caprover
 
+      - name: Build website
+        env:
+          NEXT_PUBLIC_WHATSAPP_NUMBER: ${{ vars.NEXT_PUBLIC_WHATSAPP_NUMBER }}
+        run: |
+          npm ci
+          npm run build
+
       - name: Pack website for CapRover
         run: |
           tar -cvf website-deploy.tar \
             --exclude='node_modules' \
-            --exclude='.next' \
             --exclude='.git' \
             --exclude='.github' \
             --exclude='*.tar' \
+            --exclude='.next/cache' \
             captain-definition \
             Dockerfile \
-            .
+            package.json \
+            package-lock.json \
+            next.config.js \
+            .next
 
       - name: Deploy to CapRover Server
-        env:
-          NEXT_PUBLIC_WHATSAPP_NUMBER: ${{ vars.NEXT_PUBLIC_WHATSAPP_NUMBER }}
         run: |
           caprover deploy \
             --host "${{ secrets.CAPROVER_SERVER_URL }}" \

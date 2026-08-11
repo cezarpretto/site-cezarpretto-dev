@@ -1,36 +1,19 @@
-# ---- deps ----
-FROM node:20-alpine AS deps
-WORKDIR /app
-COPY package.json package-lock.json ./
-RUN npm ci
+# Imagem final: só node + artefatos pré-buildados do Next.js standalone.
+# O `npm run build` roda na CI e produz .next/standalone (com server.js e node_modules
+# mínimo) + .next/static. Aqui só copiamos.
+FROM node:20-alpine
 
-# ---- build ----
-FROM node:20-alpine AS build
-WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
-COPY . .
-
-ENV NEXT_TELEMETRY_DISABLED=1
-ARG NEXT_PUBLIC_WHATSAPP_NUMBER=""
-ENV NEXT_PUBLIC_WHATSAPP_NUMBER=${NEXT_PUBLIC_WHATSAPP_NUMBER}
-
-RUN npm run build
-
-# ---- runtime ----
-FROM node:20-alpine AS runtime
 WORKDIR /app
 
 ENV NODE_ENV=production
-ENV NEXT_TELEMETRY_DISABLED=1
 ENV PORT=3000
 ENV HOSTNAME=0.0.0.0
+ENV NEXT_TELEMETRY_DISABLED=1
 
-RUN addgroup -g 1001 -S nodejs && adduser -S nextjs -u 1001
+COPY .next/standalone ./
+COPY .next/static ./.next/static
+COPY public ./public
 
-COPY --from=build --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=build --chown=nextjs:nodejs /app/.next/static ./.next/static
-
-USER nextjs
 EXPOSE 3000
 
 CMD ["node", "server.js"]
