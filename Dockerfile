@@ -12,7 +12,6 @@ ENV NEXT_TELEMETRY_DISABLED=1
 
 COPY .next/standalone ./
 COPY .next/static ./.next/static
-COPY public ./public
 
 EXPOSE 3000
 
