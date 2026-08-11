@@ -1,8 +1,8 @@
 {
   "metadata": {
-    "title": "Cezar Pretto — Lead Software Engineer",
-    "description": "Portfolio of Cezar Pretto: senior software engineer, technical leader and builder of scalable digital products.",
-    "keywords": "Cezar Pretto, Lead Software Engineer, Software Engineer, Tech Lead, React, Next.js, Node.js"
+    "title": "Cezar Pretto — Software Engineer",
+    "description": "Portfolio of Cezar Pretto: software engineer, currently Lead Software Engineer, building scalable digital products.",
+    "keywords": "Cezar Pretto, Software Engineer, Lead Software Engineer, Tech Lead, React, Next.js, Node.js"
   },
   "nav": {
     "projects": "Projects",
@@ -13,7 +13,8 @@
   "hero": {
     "greeting": "Hi, I'm",
     "name": "Cezar Pretto",
-    "role": "Lead Software Engineer",
+    "role": "Software Engineer",
+    "currentPosition": "Currently Lead Software Engineer at Gupy",
     "intro": "I build scalable digital products, lead technical initiatives and turn complexity into clean code. I practice AI-assisted development with spec-driven development, purpose-built tooling, and objective quality gates.",
     "ctaProjects": "View projects",
     "ctaContact": "Get in touch"

@@ -23,6 +23,9 @@ export default function Hero() {
           <p className="animate-slide-up mt-4 font-display text-2xl font-medium text-dracula-purple opacity-0 stagger-3 md:text-3xl">
             {t('role')}
           </p>
+          <p className="animate-slide-up mt-2 font-mono text-sm text-dracula-fg-muted opacity-0 stagger-3 md:text-base">
+            {t('currentPosition')}
+          </p>
           <p className="animate-slide-up mt-8 max-w-2xl font-body text-lg leading-relaxed text-dracula-fg-muted opacity-0 stagger-4 md:text-xl">
             {t('intro')}
           </p>
