@@ -1,0 +1,9 @@
+node_modules
+.next
+.git
+.github
+website-deploy.tar
+*.md
+.env*.local
+.env
+.DS_Store

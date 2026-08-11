@@ -1,0 +1,51 @@
+# Secrets (environment ou repositório) — mesmo padrão do frontend:
+# - CAPROVER_SERVER_URL
+# - CAPROVER_WEBSITE_APP_TOKEN  → token do app site-cezarpretto-dev no CapRover
+#
+# Variáveis do GitHub (environment/repo — vars, não secrets), build Next.js:
+# - NEXT_PUBLIC_WHATSAPP_NUMBER  → número no formato internacional (ex.: 5511999998888);
+#                                  vazio esconde o card WhatsApp em produção
+name: Deploy website to CapRover
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: caprover
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install CapRover CLI
+        run: npm install -g caprover
+
+      - name: Pack for CapRover
+        run: |
+          tar -cvf website-deploy.tar \
+            --exclude='node_modules' \
+            --exclude='.next' \
+            --exclude='.git' \
+            --exclude='website-deploy.tar' \
+            --exclude='.github' \
+            captain-definition \
+            Dockerfile \
+            .
+
+      - name: Deploy to CapRover Server
+        env:
+          CAPROVER_SERVER_URL: ${{ secrets.CAPROVER_SERVER_URL }}
+          CAPROVER_WEBSITE_APP_TOKEN: ${{ secrets.CAPROVER_WEBSITE_APP_TOKEN }}
+          NEXT_PUBLIC_WHATSAPP_NUMBER: ${{ vars.NEXT_PUBLIC_WHATSAPP_NUMBER }}
+        run: |
+          caprover deploy \
+            --host "$CAPROVER_SERVER_URL" \
+            --appToken "$CAPROVER_WEBSITE_APP_TOKEN" \
+            --appName "site-cezarpretto-dev" \
+            --tarFile website-deploy.tar \
+            --imageName="site-cezarpretto-dev:${{ github.sha }}" \
+            --envVars="{\"NEXT_PUBLIC_WHATSAPP_NUMBER\":\"$NEXT_PUBLIC_WHATSAPP_NUMBER\"}"
