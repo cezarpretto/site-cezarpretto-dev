@@ -18,7 +18,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const projectRoutes = projects.flatMap((project) =>
     routing.locales.map((locale) => ({
-      url: `${baseUrl}/${locale}/projetos/${project.slug}`,
+      url: `${baseUrl}/${locale}/projects/${project.slug}`,
       lastModified: new Date(),
     }))
   );

@@ -24,7 +24,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
       style={{ animationDelay: `${index * 0.1}s` }}
     >
       <Link
-        href={`/projetos/${project.slug}`}
+        href={`/projects/${project.slug}`}
         aria-label={title}
         className="absolute inset-0 z-0 rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dracula-cyan"
       />
