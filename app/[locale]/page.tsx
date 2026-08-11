@@ -12,6 +12,10 @@ interface HomePageProps {
   params: { locale: Locale };
 }
 
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+
 export default async function HomePage({ params: { locale } }: HomePageProps) {
   if (!routing.locales.includes(locale)) {
     notFound();

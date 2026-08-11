@@ -33,17 +33,10 @@ jobs:
       - name: Pack website for CapRover
         run: |
           tar -cvf website-deploy.tar \
-            --exclude='node_modules' \
-            --exclude='.git' \
-            --exclude='.github' \
-            --exclude='*.tar' \
-            --exclude='.next/cache' \
             captain-definition \
             Dockerfile \
-            package.json \
-            package-lock.json \
-            next.config.js \
-            .next
+            nginx.conf \
+            out
 
       - name: Deploy to CapRover Server
         run: |

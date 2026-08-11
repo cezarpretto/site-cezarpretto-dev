@@ -1,18 +1,10 @@
-# Imagem final: só node + artefatos pré-buildados do Next.js standalone.
-# O `npm run build` roda na CI e produz .next/standalone (com server.js e node_modules
-# mínimo) + .next/static. Aqui só copiamos.
-FROM node:20-alpine
+# Imagem final: nginx servindo o export estático do Next.js.
+# O `out/` deve existir antes do build da imagem (CI roda `npm run build` e empacota out + este arquivo).
+FROM nginx:1.27-alpine
 
-WORKDIR /app
+COPY out /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-ENV NODE_ENV=production
-ENV PORT=3000
-ENV HOSTNAME=0.0.0.0
-ENV NEXT_TELEMETRY_DISABLED=1
+EXPOSE 80
 
-COPY .next/standalone ./
-COPY .next/static ./.next/static
-
-EXPOSE 3000
-
-CMD ["node", "server.js"]
+CMD ["nginx", "-g", "daemon off;"]
