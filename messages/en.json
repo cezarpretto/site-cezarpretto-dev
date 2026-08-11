@@ -1,0 +1,57 @@
+{
+  "metadata": {
+    "title": "Cezar Pretto — Lead Software Engineer",
+    "description": "Portfolio of Cezar Pretto: senior software engineer, technical leader and builder of scalable digital products.",
+    "keywords": "Cezar Pretto, Lead Software Engineer, Software Engineer, Tech Lead, React, Next.js, Node.js"
+  },
+  "nav": {
+    "projects": "Projects",
+    "experience": "Experience",
+    "stack": "Stack",
+    "contact": "Contact"
+  },
+  "hero": {
+    "greeting": "Hi, I'm",
+    "name": "Cezar Pretto",
+    "role": "Lead Software Engineer",
+    "intro": "I build scalable digital products, lead technical initiatives and turn complexity into clean code. I practice AI-assisted development with spec-driven development, purpose-built tooling, and objective quality gates.",
+    "ctaProjects": "View projects",
+    "ctaContact": "Get in touch"
+  },
+  "projects": {
+    "title": "Selected projects",
+    "subtitle": "Real case studies of products I built end-to-end as tech lead and founder.",
+    "viewProject": "View details",
+    "viewSource": "Source code",
+    "viewDemo": "Live demo",
+    "back": "Back"
+  },
+  "experience": {
+    "title": "Experience",
+    "subtitle": "A career path built across technology, advisory and community companies.",
+    "present": "Present",
+    "roles": {}
+  },
+  "stack": {
+    "title": "Stack & tools",
+    "subtitle": "Technologies I use daily to deliver value with quality.",
+    "categories": {
+      "frontend": "Frontend",
+      "backend": "Backend & Cloud",
+      "data": "Data & DevOps",
+      "practices": "Practices"
+    }
+  },
+  "contact": {
+    "title": "Let's build something together?",
+    "subtitle": "If you want to exchange ideas, discuss an opportunity or invite me to a podcast, reach me on any channel.",
+    "email": "Email",
+    "linkedin": "LinkedIn",
+    "github": "GitHub",
+    "whatsapp": "WhatsApp",
+    "whatsappLabel": "Open WhatsApp chat"
+  },
+  "footer": {
+    "copyright": "© {year} Cezar Pretto. All rights reserved."
+  }
+}

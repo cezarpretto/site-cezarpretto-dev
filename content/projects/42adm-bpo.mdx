@@ -1,0 +1,45 @@
+---
+title: "42 ADM BPO — Plataforma de Onboarding para BPOs Financeiros"
+title_en: "42 ADM BPO — Onboarding Platform for Financial BPOs"
+summary: "SaaS multi-tenant para BPOs financeiros gerenciarem o onboarding dos clientes: checklists de documentos, cronogramas visuais, KPIs executivos e área admin."
+summary_en: "Multi-tenant SaaS for financial BPO companies to manage client onboarding: document checklists, visual schedules, executive KPIs, and admin area."
+tech: ["NestJS", "React", "TypeScript", "PostgreSQL", "Ant Design", "Multi-tenant SaaS", "Cloud Storage"]
+demoUrl: "https://42adm.com"
+repoUrl: ""
+featured: true
+order: 6
+---
+
+## Contexto
+
+A 42 ADM é uma BPO financeira brasileira que atende empresários e produtores rurais. Para gerenciar o onboarding dos clientes dela, a equipe usava planilha + um protótipo HTML alimentado por um JSON gigante — fonte de verdade frágil, sem KPIs executivos, sem visibilidade de cronograma. A solução foi construir um SaaS dedicado, modelado para atender **qualquer BPO financeiro** (multi-tenant), substituindo esse workflow manual.
+
+Hoje o sistema é usado diariamente pela equipe da 42 ADM para abrir, acompanhar e fechar projetos de implementação de clientes — com visibilidade que antes simplesmente não existia.
+
+## Desafio
+
+- **Visibilidade de negócio**: a diretoria precisava enxergar o status dos onboardings em tempo real, sem montar relatórios manuais.
+- **Cronograma como ferramenta de gestão**: tarefas, prazos, responsáveis e fases precisam ser visualizáveis e ajustáveis, não planilhados.
+- **Comunicação com o cliente sem expor o sistema**: o cliente precisa acompanhar o andamento, mas não faz sentido dar acesso ao sistema interno.
+- **Reaproveitamento**: abrir cliente novo segue o mesmo playbook do anterior — templates aceleram isso.
+- **Múltiplos papéis no mesmo sistema**: root (plataforma), owner (BPO), user (operador) — cada um vê e faz o que é seu.
+- **Atualizações confiáveis**: e-mails de digest e status têm que refletir o estado real, mesmo quando processos rodam em background.
+
+## Solução
+
+- **Dashboard executivo**: KPIs persona-scoped (root, owner, operador) com visão consolidada de onboarding em andamento, atrasados e concluídos.
+- **Cronograma visual por projeto**: tarefas organizadas por fase, com datas relativas a partir do kickoff, responsáveis atribuídos e dependências visíveis.
+- **Checklist de documentos**: lista de documentos exigidos por cliente, com controle de recebimento e download em massa.
+- **Link público para o cliente**: token de uso único que mostra o status do projeto sem precisar de login — alinhamento sem fricção.
+- **Templates reutilizáveis**: cada novo cliente começa com um template pré-configurado; só ajusta o que difere. Tempo de abertura cai drasticamente.
+- **Comunicação automatizada**: e-mails de digest em dias definidos, sem intervenção manual.
+- **Atualizações confiáveis em background**: mudanças de estado disparam e-mails e contadores sem risco de perder evento — não há cenário em que o estado mude sem a comunicação correspondente.
+- **Área admin**: gestão de tenants, usuários e papéis em ambiente dedicado para a plataforma.
+
+## Resultados
+
+- Substituiu planilha + JSON e está em produção homologada na 42 ADM.
+- Usado diariamente pela equipe para acompanhar o onboarding de clientes ativos.
+- Templates reutilizáveis aceleram a abertura de novos clientes sem repetir trabalho manual.
+- Link público tokenizado permite o próprio cliente acompanhar o status sem acessar o sistema interno.
+- Qualidade coberta por testes automatizados e quality gate objetivo no CI.

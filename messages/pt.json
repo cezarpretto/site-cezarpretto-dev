@@ -1,0 +1,57 @@
+{
+  "metadata": {
+    "title": "Cezar Pretto — Lead Software Engineer",
+    "description": "Portfólio de Cezar Pretto: engenheiro de software sênior, líder técnico e desenvolvedor de produtos digitais escaláveis.",
+    "keywords": "Cezar Pretto, Lead Software Engineer, Engenheiro de Software, Tech Lead, React, Next.js, Node.js"
+  },
+  "nav": {
+    "projects": "Projetos",
+    "experience": "Experiência",
+    "stack": "Stack",
+    "contact": "Contato"
+  },
+  "hero": {
+    "greeting": "Olá, sou",
+    "name": "Cezar Pretto",
+    "role": "Lead Software Engineer",
+    "intro": "Construo produtos digitais escaláveis, lidero iniciativas técnicas e transformo complexidade em código claro. Pratico desenvolvimento assistido por IA com spec-driven development, ferramentas próprias e quality gates objetivos.",
+    "ctaProjects": "Ver projetos",
+    "ctaContact": "Falar comigo"
+  },
+  "projects": {
+    "title": "Projetos selecionados",
+    "subtitle": "Cases reais de produtos que desenvolvi end-to-end como tech lead e founder.",
+    "viewProject": "Ver detalhes",
+    "viewSource": "Código fonte",
+    "viewDemo": "Demo ao vivo",
+    "back": "Voltar"
+  },
+  "experience": {
+    "title": "Experiência",
+    "subtitle": "Trajetória construída em empresas de tecnologia, assessoria e comunidade.",
+    "present": "Atual",
+    "roles": {}
+  },
+  "stack": {
+    "title": "Stack & ferramentas",
+    "subtitle": "Tecnologias que uso no dia a dia para entregar valor com qualidade.",
+    "categories": {
+      "frontend": "Frontend",
+      "backend": "Backend & Cloud",
+      "data": "Dados & DevOps",
+      "practices": "Práticas"
+    }
+  },
+  "contact": {
+    "title": "Vamos construir algo juntos?",
+    "subtitle": "Se você quer trocar ideia, discutir uma oportunidade ou convidar para um podcast, me chame por qualquer canal.",
+    "email": "Email",
+    "linkedin": "LinkedIn",
+    "github": "GitHub",
+    "whatsapp": "WhatsApp",
+    "whatsappLabel": "Abrir conversa no WhatsApp"
+  },
+  "footer": {
+    "copyright": "© {year} Cezar Pretto. Todos os direitos reservados."
+  }
+}

@@ -1,0 +1,45 @@
+---
+title: "SpecHub — Memória Compartilhada para Agentes de IA (Open Source)"
+title_en: "SpecHub — Shared Memory for AI Agents (Open Source)"
+summary: "Servidor MCP open-source que armazena PRDs, specs técnicos, designs e tasks por repo, e expõe tools que agentes de IA consultam direto da IDE."
+summary_en: "Open-source MCP server that stores PRDs, technical specs, designs, and per-repo tasks, exposing tools that AI agents consume directly from the IDE."
+tech: ["TypeScript", "Node.js", "Model Context Protocol", "PostgreSQL", "Vector Search", "Docker", "OAuth"]
+demoUrl: "https://github.com/cezarpretto/spec-hub"
+repoUrl: "https://github.com/cezarpretto/spec-hub"
+featured: true
+order: 7
+---
+
+## Contexto
+
+Agentes de IA em IDEs (Cursor, Claude Code, Windsurf, Codex) operam com janela de contexto finita. Quando um time precisa que múltiplos agentes — em repos diferentes — sigam o mesmo PRD ou spec técnico, eles rapidamente transbordam: ou o agente recebe o spec inteiro (e desperdiça contexto), ou recebe um trecho sem contexto (e alucina). A documentação fica espalhada entre Confluence, Jira e READMEs, sem versão canônica, e morre logo após o planejamento.
+
+SpecHub resolve isso sendo **a fonte da verdade única, persistente e semanticamente pesquisável** que qualquer agente consulta via Model Context Protocol. Em vez de injetar documentos inteiros no contexto, o agente faz uma busca e recebe só a seção relevante.
+
+## Desafio
+
+- **Contexto cirúrgico**: o agente precisa do snippet certo, da seção certa — não do documento inteiro.
+- **Documentação que evolui com o código**: PRDs e specs são escritos antes, abandonados durante a implementação e nunca revisitados. O sistema precisa incentivar atualização contínua.
+- **Features cross-repo**: API, worker, frontend e infra precisam compartilhar memória entre agentes sem duplicação.
+- **Custo de embedding**: APIs externas de embedding somam rápido em uso contínuo. Para uma ferramenta interna de time, isso é proibitivo.
+- **Atomicidade**: salvar documento e índice semântico tem que ser tudo-ou-nada — não dá pra ter doc sem vetor, ou vetor sem doc.
+- **Auth flexível**: humanos usam OAuth, agentes usam tokens estáticos. Os dois precisam conviver.
+- **Zero-touch em produção**: o sistema precisa se instalar, migrar e manter-se saudável sem operação manual.
+
+## Solução
+
+- **Busca semântica e lexical combinadas**: o sistema encontra a seção certa mesmo quando o termo exato não está no spec — funciona bem em português e em outras línguas.
+- **8 tools MCP prontas para a IDE**: gravar e editar specs, listar artefatos, navegar headings, ler seção inteira, buscar contexto, gerenciar tasks por repo. Tudo a partir do Cursor, Claude Code ou Windsurf.
+- **Custo zero de embedding**: vetores são gerados localmente em CPU, sem chamada externa por token. Sem vendor lock-in, sem fatura surpresa.
+- **Escrita atômica**: gravar spec é uma transação completa — conteúdo, índice e changelog commitam juntos ou nada commitam. Não há estado parcial.
+- **Auth componível**: humanos entram com Google; agentes entram com tokens estáticos. O sistema aceita os dois sem código de aplicação saber qual é qual.
+- **Self-hosted e Docker-ready**: a imagem roda com auto-migrations, healthcheck e cache local do modelo. Em produção, basta deploy.
+- **Spec-first dogfooding**: o próprio SpecHub tem PRD, spec técnico e issues escritas antes do código. A ferramenta pratica o que prega.
+
+## Resultados
+
+- Open source público em `github.com/cezarpretto/spec-hub`.
+- Imagem Docker multi-arch publicada, com auto-migrations e healthcheck, pronta para subir em qualquer host.
+- Funciona com qualquer cliente MCP moderno — Cursor, Claude Code, Windsurf, Codex.
+- Contrato coberto por testes automatizados; qualidade é critério de merge, não de feeling.
+- Adotado na prática em outros projetos próprios para manter spec e código sincronizados.

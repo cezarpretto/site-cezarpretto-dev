@@ -1,0 +1,48 @@
+---
+title: "Engenharia Assistida por IA"
+title_en: "AI-Assisted Engineering"
+summary: "Como integro IA no fluxo de engenharia como prática sistemática: spec-driven development, ferramentas próprias e quality gates objetivos."
+summary_en: "How I integrate AI into engineering as a systematic practice: spec-driven development, purpose-built tooling, and objective quality gates."
+tech: ["Spec-Driven Development", "TypeScript", "Model Context Protocol", "PostgreSQL", "Vector Search", "GitHub Actions", "Harness Scoring"]
+demoUrl: ""
+repoUrl: "https://github.com/cezarpretto/spec-hub"
+featured: true
+order: 1
+---
+
+## Contexto
+
+Trabalhar com IA em engenharia pode significar coisas muito diferentes. Para mim, IA é uma peça central do fluxo — não um chat aberto que gera código por instinto. É uma prática sistemática com artefatos verificáveis: specs vivas que evoluem com o código, ferramentas que eu mesmo construí para viabilizar o processo, e quality gates objetivos que decidem se o trabalho está pronto.
+
+Essa página resume a prática como ela aparece nos meus projetos — Zapytos, 42 ADM BPO, 42 Files e o próprio SpecHub.
+
+## Desafio
+
+Três problemas aparecem quando IA entra no fluxo de engenharia sem processo:
+
+- **Contexto transborda**: specs reais são grandes. Quando o agente recebe o documento inteiro, a qualidade do output cai. Quando recebe um trecho solto, alucina. Não dá para ignorar essa restrição.
+- **Documentação morre**: PRDs e specs técnicos são escritos antes do código, abandonados durante a implementação e nunca revisitados. O resultado é um artefato inútil que mente sobre o sistema.
+- **Qualidade é subjetiva**: "parece bom" não é critério de merge. Sem gate objetivo, código gerado por IA vira dívida técnica a pagar em seis meses.
+
+E um quarto problema, mais sutil: features que cruzam repos (API + worker + frontend + infra) precisam de memória compartilhada entre agentes — persistente, versionada e semanticamente pesquisável.
+
+## Solução
+
+A prática tem quatro camadas que se reforçam.
+
+**1. Specs vivas.** Toda feature começa com um spec que evolui junto com o código — agentes e humanos atualizam seções no meio da implementação, não depois. Zapytos e 42 ADM BPO usam esse padrão em todas as features. A documentação deixa de ser insumo descartável e vira fonte viva de verdade.
+
+**2. SpecHub — a ferramenta que eu construí para escalar a prática.** Servidor MCP open-source que serve como memória compartilhada entre agentes IA. Em vez de injetar o spec inteiro no contexto, o agente consulta via tools e recebe só a seção relevante. Busca semântica + lexical combinada, embeddings locais com custo zero por token, gravação atômica que não deixa estado pela metade. Funciona com Cursor, Claude Code, Windsurf, Codex.
+
+**3. Quality gates objetivos.** Não aceito "parece bom" como critério. Cada projeto tem um harness que mede qualidade mensurável — typecheck, cobertura, circularidade de dependências, lint, testes de contrato. No 42 ADM BPO, o gate é uma pontuação máxima: sem ela, sem merge. Vale para código escrito por humano ou por IA — mesma régua.
+
+**4. Dogfooding.** O SpecHub tem seu próprio PRD, spec técnico e issues numeradas escritas spec-first antes do código. É a mesma prática, aplicada ao próprio projeto que codifica a prática.
+
+## Resultados
+
+- **42 ADM BPO**: SaaS multi-tenant completo entregue em produção, com cronograma, checklists, dashboard executivo e comunicação automatizada com clientes.
+- **SpecHub**: open source público, com imagem Docker pronta para subir em qualquer host. Funciona com qualquer cliente MCP moderno.
+- **Zapytos**: produto B2B em produção, com fluxo ponta a ponta de orçamento a aprovação via WhatsApp.
+- **Prática consolidada**: documentação evolui junto com código; qualidade é mensurável em vez de subjetiva.
+
+IA aqui não é ferramenta de marketing — é o que permite entregar SaaS multi-tenant com rigor de produção em prazos curtos, sem abrir mão de qualidade mensurável.

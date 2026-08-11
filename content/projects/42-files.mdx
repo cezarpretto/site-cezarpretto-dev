@@ -1,0 +1,44 @@
+---
+title: "42 Files — Arquivo Digital com Assinatura ICP-Brasil"
+title_en: "42 Files — Digital Archive with ICP-Brasil Signing"
+summary: "SaaS multi-tenant onde cada PDF uploaded é automaticamente assinado com o certificado digital A1 da empresa, gerando documento juridicamente válido com trilha de auditoria."
+summary_en: "Multi-tenant SaaS where every uploaded PDF is automatically signed with the company's A1 digital certificate, producing legally valid documents with audit trail."
+tech: ["NestJS", "React", "TypeScript", "PostgreSQL", "Ant Design", "ICP-Brasil A1", "Document Signing"]
+demoUrl: "https://42files.com"
+repoUrl: ""
+featured: true
+order: 5
+---
+
+## Contexto
+
+Empresas brasileiras que precisam arquivar documentos com validade jurídica (contratos, procurações, notas fiscais) sabem que um PDF sozinho não vale nada sem assinatura digital. A saída tradicional — assinar manualmente cada arquivo com certificado A1 — é lenta, propensa a erro e raramente deixa trilha. O 42 Files transforma esse processo em algo automático: **o cliente sobe o PDF e o sistema assina com o certificado da empresa, registrando tudo em uma timeline imutável**.
+
+O resultado é arquivo juridicamente válido, com histórico verificável de quem viu, baixou e quando.
+
+## Desafio
+
+- **Validade legal sem fricção**: a assinatura precisa ser tecnicamente correta (não corrompe o PDF, é verificável por leitores padrão), sem exigir conhecimento técnico do usuário.
+- **Multi-tenant com quotas**: cada empresa cliente tem seu ambiente isolado, com limite de armazenamento definido pelo plano — sem risco de mistura entre clientes.
+- **Processos assíncronos confiáveis**: o pipeline (upload → assinar → arquivar → notificar → contabilizar quota) tem que rodar inteiro mesmo se algo falhar no meio. Documento meio-assinado não pode existir.
+- **Busca em português**: clientes precisam achar documentos por nome de empresa, participante, local ou período — e busca com stemming em PT-BR não é o padrão de engines genéricas.
+- **Segurança proativa**: se o certificado da empresa venceu, o sistema tem que bloquear novos uploads antes do cliente descobrir do jeito difícil.
+- **Permissões granulares**: diferentes papéis (admin, operador, visualizador) veem e fazem coisas diferentes, e isso tem que ser consistente no backend e na UI.
+
+## Solução
+
+- **Pipeline automático de arquivamento**: upload → assinatura → arquivo final → auditoria, sem intervenção humana.
+- **Trilha de auditoria imutável**: cada evento (criado, visualizado, baixado, compartilhado) fica registrado com timestamp e usuário, formando uma timeline verificável.
+- **Busca rápida em PT-BR**: filtros por empresa, participante, local, período e texto livre, com indexação otimizada para stemming em português.
+- **Lockdown automático de certificado vencido**: o sistema detecta a expiração e bloqueia novos uploads com mensagem clara — sem brecha para arquivo inválido.
+- **Quotas por plano, contadas com precisão**: uso de armazenamento atualizado de forma confiável, sem depender de estimativas.
+- **Permissões por papel**: menus, botões e ações derivam todos do conjunto de permissões do usuário, sem hardcode.
+- **Compartilhamento externo rastreado**: links temporários para visualização sem login continuam registrando quem viu, quando e de onde.
+- **Observabilidade**: logs estruturados e APM desde o primeiro deploy, para investigar incidentes sem caça ao tesouro.
+
+## Resultados
+
+- Produto em produção com clientes ativos arquivando documentos juridicamente válidos.
+- Pipeline assíncrono robusto: cenários de falha são tratados sem deixar estado inconsistente.
+- Detecção automática de certificado vencido elimina uploads inválidos antes que virem problema jurídico.
+- Base de código modular, com qualidade coberta por testes automatizados e quality gate no CI.

@@ -1,0 +1,43 @@
+---
+title: "SRCAL — Portal do Cliente integrado ao ERP interno"
+title_en: "SRCAL — Client Portal integrated with internal ERP"
+summary: "Portal web para clientes da Calcário SRCAL acessarem pedidos, programação de cargas e extratos de NF — integrado ao ERP interno sem alterar a operação que já existia."
+summary_en: "Web portal for Calcário SRCAL clients to access orders, truck load scheduling, and invoice extracts — integrated with the internal ERP without changing existing operations."
+tech: ["Node.js", "Express", "MongoDB", "Vue.js", "Mobile-First", "ERP Integration", "JWT"]
+demoUrl: "https://painel.calcariosrcal.com.br"
+repoUrl: ""
+featured: true
+order: 8
+---
+
+## Contexto
+
+A Calcário SRCAL é uma empresa brasileira de insumos agrícolas cujo ERP interno roda em rede local e não tem interface web para clientes externos. Os clientes (produtores rurais, empresas agrícolas) tinham que ligar no comercial para saber status de pedido, toneladas entregues ou data de carga — zero visibilidade, zero self-service.
+
+O portal entrega essa visibilidade direto no navegador, **sem alterar o ERP**: o backend faz o papel de adaptador, expondo os dados internos como uma API moderna para o frontend. O ERP continua exatamente como era, mas agora o cliente final vê o que precisa.
+
+## Desafio
+
+- **Integrar sem alterar**: o ERP é legado, crítico e não pode ser modificado. Toda a integração tinha que acontecer na camada externa.
+- **Performance sem sobrecarregar o ERP**: o ERP não foi feito para receber tráfego de portal público. Latência e carga tinham que ser contidas do lado do portal.
+- **Resiliência a quedas do ERP**: o ERP pode cair. O portal tinha que degradar com mensagem clara, sem expor o erro técnico para o cliente.
+- **Multi-empresa por usuário**: cada usuário podia ser cliente de várias empresas (CNPJs/CPFs diferentes) e precisava alternar entre elas sem fricção.
+- **Modo duplo de uso**: app standalone e embed dentro do site institucional — a mesma base tinha que servir os dois cenários sem retrabalho.
+- **Pesquisas internas sem ferramenta dedicada**: a empresa queria pesquisas de satisfação com estatísticas por pergunta, sem contratar SaaS externo.
+
+## Solução
+
+- **Adapter backend sobre o ERP**: o portal conversa com o ERP através de uma camada de adaptação que traduz o protocolo legado para uma API moderna, sem tocar no sistema interno.
+- **Cache com refresh automático**: dados de alta leitura (lista de clientes) ficam em cache e são refrescados em background, mantendo o ERP livre de carga repetitiva.
+- **Tratamento de erro amigável**: se o ERP está fora, o usuário vê uma mensagem clara — não um erro técnico. O sistema se recupera sozinho quando o ERP volta.
+- **Seleção multi-empresa**: o usuário loga uma vez e escolhe qual empresa quer consultar; cada troca é instantânea.
+- **Extrato fiscal e programação de carga**: cada pedido tem drill-down em extrato (NF, placa, toneladas entregues vs. faltantes) e em programação (data, placa, motorista, transportadora, toneladas, status) — ambos imprimíveis como relatório PDF.
+- **Modo iframe embutido**: o portal detecta quando está embedado no site institucional e renderiza um card slim "Acessar área do cliente" em vez do app completo. Mesma base, dois produtos.
+- **Pesquisas com estatísticas por pergunta**: admin cria pesquisa alvo por cliente, define prazo e questões; respostas geram estatísticas visuais por pergunta para decisão interna.
+
+## Resultados
+
+- Portal em produção (`painel.calcariosrcal.com.br`) atendendo clientes reais da Calcário SRCAL.
+- Self-service eliminou o ciclo de "ligar no comercial para saber status de pedido".
+- Funciona em dois modos (standalone e embed institucional) com o mesmo código.
+- Módulo de pesquisas ativo alimentando decisões internas com dados reais dos clientes.

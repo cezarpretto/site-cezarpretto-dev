@@ -1,0 +1,41 @@
+---
+title: "Zapytos — Automação de Orçamentos por WhatsApp"
+title_en: "Zapytos — WhatsApp Quote Automation"
+summary: "SaaS B2B que automatiza o ciclo de orçamento → aprovação pelo cliente via WhatsApp, com link público de aprovação sem login."
+summary_en: "B2B SaaS that automates the quote → customer-approval cycle over WhatsApp, with a public, login-free approval link."
+tech: ["NestJS", "React", "TypeScript", "PostgreSQL", "Ant Design", "WhatsApp Business API", "Cloud Storage"]
+demoUrl: "https://zapytos.com.br"
+repoUrl: ""
+featured: true
+order: 4
+---
+
+## Contexto
+
+Empresas brasileiras de serviço e comércio ainda fecham orçamentos por telefone, papel ou conversa solta — sem trilha digital, sem follow-up estruturado, sem aprovação formal do cliente. Zapytos digitaliza esse ciclo inteiro: o operador monta o orçamento no painel, submete para aprovação, e o sistema envia automaticamente para o cliente uma mensagem WhatsApp com **um link público onde o cliente aprova ou rejeita sem precisar criar login**.
+
+O resultado é um ciclo de vendas com tempo de fechamento menor, registro formal de aceite, e zero intervenção manual depois da criação do orçamento.
+
+## Desafio
+
+- **Confiança no número**: valores de orçamento brasileiro não admitem erro de arredondamento. O sistema precisa garantir cálculo confiável do começo ao fim.
+- **Notificação resiliente**: o envio por WhatsApp não pode bloquear o operador nem depender 100% da disponibilidade do provedor — falhas de canal têm que degradar com elegância.
+- **Aprovação pública, auditada**: o link sem login precisa ser simples para o cliente (uma tela, um botão) mas rastreável para o operador (IP, hora, dispositivo).
+- **Multi-tenant nativo**: cada empresa cliente da Zapytos vê apenas os próprios orçamentos, clientes e histórico — sem risco de vazamento entre tenants.
+- **Anexos sem gargalo**: PDFs e imagens de orçamento precisam de upload fluido, sem saturar o backend.
+
+## Solução
+
+- **Workflow ponta a ponta automatizado**: orçamento → submissão → notificação WhatsApp → aprovação pública → auditoria. Tudo acontece sem intervenção depois da criação.
+- **WhatsApp como canal de fechamento**: aproveita o canal que o cliente brasileiro já usa, com mensagem interativa de aprovação. O envio é desacoplado do request HTTP — uma falha de provedor não trava a operação.
+- **Link público de aprovação**: o cliente abre no celular, vê o orçamento formatado, aprova ou rejeita em um toque. Cada acesso é logado para compliance.
+- **Cálculo financeiro preciso**: sem aritmética de ponto flutuante. Cada centavo é confiável.
+- **Upload direto ao storage**: anexos sobem sem passar pelo backend, mantendo a API rápida mesmo em volumes altos.
+- **Painel multi-tenant**: cada empresa opera em ambiente isolado, com sua própria base de clientes, catálogo de serviços e identidade visual.
+- **Site comercial com captação direta**: o formulário de contato do site (com proteção anti-bot) cai automaticamente no WhatsApp comercial.
+
+## Resultados
+
+- Produto em produção atendendo empresas de serviço e comércio no Brasil.
+- Workflow de aprovação digital reduziu o tempo entre orçamento criado e resposta do cliente para minutos.
+- Toda a operação roda em três deploys independentes — backend, painel e site — com cobertura de testes e pipeline de qualidade automatizado.
