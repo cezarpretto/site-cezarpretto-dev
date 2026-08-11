@@ -21,9 +21,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install CapRover CLI
-        run: npm install -g caprover@2.4.3
+        run: npm install -g caprover
 
-      - name: Pack for CapRover
+      - name: Pack website for CapRover
         run: |
           tar -cvf website-deploy.tar \
             --exclude='node_modules' \
@@ -35,39 +35,12 @@ jobs:
             Dockerfile \
             .
 
-      - name: Verify tar
-        run: |
-          echo "Tamanho do tar: $(du -h website-deploy.tar | cut -f1)"
-          echo "Entradas na raiz:"
-          tar -tvf website-deploy.tar | grep -E "^\s" | awk '{print $NF}' | grep -v '^./' | sort -u | head -10
-          echo "captain-definition presente?"
-          tar -tvf website-deploy.tar | grep -E "captain-definition"
-          echo "Dockerfile presente?"
-          tar -tvf website-deploy.tar | grep -E "Dockerfile$"
-
-      - name: Deploy to CapRover
+      - name: Deploy to CapRover Server
         env:
-          CAPROVER_SERVER_URL: ${{ secrets.CAPROVER_SERVER_URL }}
-          CAPROVER_WEBSITE_APP_TOKEN: ${{ secrets.CAPROVER_WEBSITE_APP_TOKEN }}
-        run: caprover deploy \
-            --host "$CAPROVER_SERVER_URL" \
-            --appToken "$CAPROVER_WEBSITE_APP_TOKEN" \
+          NEXT_PUBLIC_WHATSAPP_NUMBER: ${{ vars.NEXT_PUBLIC_WHATSAPP_NUMBER }}
+        run: |
+          caprover deploy \
+            --host "${{ secrets.CAPROVER_SERVER_URL }}" \
+            --appToken "${{ secrets.CAPROVER_WEBSITE_APP_TOKEN }}" \
             --appName "site-cezarpretto-dev" \
             --tarFile website-deploy.tar
-
-      - name: Verify deploy was triggered (best-effort)
-        env:
-          CAPROVER_SERVER_URL: ${{ secrets.CAPROVER_SERVER_URL }}
-          CAPROVER_WEBSITE_APP_TOKEN: ${{ secrets.CAPROVER_WEBSITE_APP_TOKEN }}
-        run: |
-          echo "Aguardando 30s para o CapRover iniciar o build..."
-          sleep 30
-          caprover api \
-            --host "$CAPROVER_SERVER_URL" \
-            --appToken "$CAPROVER_WEBSITE_APP_TOKEN" \
-            --path "/user/apps/appDefinitions/status" \
-            --method GET \
-            --data '{"appName":"site-cezarpretto-dev"}' \
-            -o deploy-status.json || echo "(api check falhou — verifique manualmente no painel do CapRover)"
-          echo "Status retornado:"
-          cat deploy-status.json 2>/dev/null || echo "(sem arquivo)"
