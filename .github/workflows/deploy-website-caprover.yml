@@ -1,10 +1,9 @@
-# Secrets (environment ou repositório) — mesmo padrão do frontend:
+# Secrets (environment ou repositório):
 # - CAPROVER_SERVER_URL
 # - CAPROVER_WEBSITE_APP_TOKEN  → token do app site-cezarpretto-dev no CapRover
 #
-# Variáveis do GitHub (environment/repo — vars, não secrets), build Next.js:
-# - NEXT_PUBLIC_WHATSAPP_NUMBER  → número no formato internacional (ex.: 5511999998888);
-#                                  vazio esconde o card WhatsApp em produção
+# Variáveis (environment/repo — vars, não secrets), build Next.js:
+# - NEXT_PUBLIC_WHATSAPP_NUMBER  → formato internacional (ex.: 5511999998888); vazio esconde o card WhatsApp
 name: Deploy website to CapRover
 
 on:
@@ -22,7 +21,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install CapRover CLI
-        run: npm install -g caprover
+        run: npm install -g caprover@2.4.3
 
       - name: Pack for CapRover
         run: |
@@ -30,20 +29,45 @@ jobs:
             --exclude='node_modules' \
             --exclude='.next' \
             --exclude='.git' \
-            --exclude='website-deploy.tar' \
             --exclude='.github' \
+            --exclude='*.tar' \
             captain-definition \
             Dockerfile \
             .
 
-      - name: Deploy to CapRover Server
+      - name: Verify tar
+        run: |
+          echo "Tamanho do tar: $(du -h website-deploy.tar | cut -f1)"
+          echo "Entradas na raiz:"
+          tar -tvf website-deploy.tar | grep -E "^\s" | awk '{print $NF}' | grep -v '^./' | sort -u | head -10
+          echo "captain-definition presente?"
+          tar -tvf website-deploy.tar | grep -E "captain-definition"
+          echo "Dockerfile presente?"
+          tar -tvf website-deploy.tar | grep -E "Dockerfile$"
+
+      - name: Deploy to CapRover
         env:
           CAPROVER_SERVER_URL: ${{ secrets.CAPROVER_SERVER_URL }}
           CAPROVER_WEBSITE_APP_TOKEN: ${{ secrets.CAPROVER_WEBSITE_APP_TOKEN }}
-          NEXT_PUBLIC_WHATSAPP_NUMBER: ${{ vars.NEXT_PUBLIC_WHATSAPP_NUMBER }}
-        run: |
-          caprover deploy \
+        run: caprover deploy \
             --host "$CAPROVER_SERVER_URL" \
             --appToken "$CAPROVER_WEBSITE_APP_TOKEN" \
             --appName "site-cezarpretto-dev" \
             --tarFile website-deploy.tar
+
+      - name: Verify deploy was triggered (best-effort)
+        env:
+          CAPROVER_SERVER_URL: ${{ secrets.CAPROVER_SERVER_URL }}
+          CAPROVER_WEBSITE_APP_TOKEN: ${{ secrets.CAPROVER_WEBSITE_APP_TOKEN }}
+        run: |
+          echo "Aguardando 30s para o CapRover iniciar o build..."
+          sleep 30
+          caprover api \
+            --host "$CAPROVER_SERVER_URL" \
+            --appToken "$CAPROVER_WEBSITE_APP_TOKEN" \
+            --path "/user/apps/appDefinitions/status" \
+            --method GET \
+            --data '{"appName":"site-cezarpretto-dev"}' \
+            -o deploy-status.json || echo "(api check falhou — verifique manualmente no painel do CapRover)"
+          echo "Status retornado:"
+          cat deploy-status.json 2>/dev/null || echo "(sem arquivo)"
