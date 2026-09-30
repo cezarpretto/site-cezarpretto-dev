@@ -1,58 +1,156 @@
 {
   "metadata": {
-    "title": "Cezar Pretto — Engenheiro de Software",
-    "description": "Portfólio de Cezar Pretto: engenheiro de software, atualmente Lead Software Engineer, construindo produtos digitais escaláveis.",
-    "keywords": "Cezar Pretto, Engenheiro de Software, Software Engineer, Lead Software Engineer, Tech Lead, React, Next.js, Node.js"
+    "title": "Cezar Pretto — Software sob medida | do papel ao produto",
+    "description": "Cezar Pretto desenvolve software sob medida para empresas que querem tirar projetos e produtos do papel ou resolver problemas com tecnologia. Engenheiro de software e Lead Software Engineer na Gupy.",
+    "keywords": "Cezar Pretto, software sob medida, desenvolvimento de software, engenheiro de software, Lead Software Engineer, Tech Lead, React, Next.js, Node.js"
   },
   "nav": {
-    "projects": "Projetos",
+    "projects": "Cases",
     "experience": "Experiência",
     "stack": "Stack",
-    "contact": "Contato"
+    "contact": "Falar comigo",
+    "aria": "Navegação principal",
+    "open": "Abrir menu",
+    "close": "Fechar menu",
+    "themeLight": "Mudar para tema claro",
+    "themeDark": "Mudar para tema escuro"
   },
   "hero": {
-    "greeting": "Olá, sou",
-    "name": "Cezar Pretto",
-    "role": "Engenheiro de Software",
-    "currentPosition": "Atualmente Lead Software Engineer na Gupy",
-    "intro": "Construo produtos digitais escaláveis, lidero iniciativas técnicas e transformo complexidade em código claro. Pratico desenvolvimento assistido por IA com spec-driven development, ferramentas próprias e quality gates objetivos.",
-    "ctaProjects": "Ver projetos",
-    "ctaContact": "Falar comigo"
+    "titleA": "Do papel",
+    "titleB": "ao produto.",
+    "offer": "Software sob medida para a sua operação.",
+    "intro": "Você chega com a ideia, o projeto parado ou o sistema que não acompanha mais o negócio. Eu entendo o problema, desenho a solução e entrego funcionando, com você acompanhando cada etapa.",
+    "ctaContact": "Falar sobre o seu projeto",
+    "ctaProjects": "Ver cases",
+    "meta": "Cezar Pretto · engenheiro de software · sócio e Lead Software Engineer na Gupy",
+    "caption": "Exemplo ilustrativo: uma proposta técnica vira sistema em produção conforme você rola a página.",
+    "ruleFrom": "papel",
+    "ruleTo": "produto",
+    "sheet": {
+      "label": "Proposta técnica",
+      "title": "[seu projeto]",
+      "for": "proposta técnica para [sua empresa]",
+      "rows": [
+        {
+          "k": "problema",
+          "v": "pedidos no WhatsApp"
+        },
+        {
+          "k": "escopo",
+          "v": "portal + ERP"
+        },
+        {
+          "k": "prazo",
+          "v": "[N] semanas"
+        },
+        {
+          "k": "entregas",
+          "v": "semanais, em produção"
+        }
+      ]
+    },
+    "panel": {
+      "title": "pedidos",
+      "nav": [
+        "pedidos",
+        "cargas",
+        "extratos"
+      ],
+      "orders": [
+        {
+          "id": "#1042",
+          "mid": "carga 07:30",
+          "tag": "confirmado"
+        },
+        {
+          "id": "#1043",
+          "mid": "carga 09:00",
+          "tag": "agendado"
+        },
+        {
+          "id": "#1044",
+          "mid": "carga 10:30",
+          "tag": "agendado"
+        },
+        {
+          "id": "#1045",
+          "mid": "carga 13:00",
+          "tag": "novo"
+        }
+      ],
+      "weeks": "S",
+      "deploy": "deploy › em produção"
+    },
+    "example": "exemplo ilustrativo"
+  },
+  "approach": {
+    "title": "Quem contrata, contrata uma pessoa.",
+    "body": "Você fala direto com quem projeta e constrói o sistema, do primeiro rascunho à entrega e depois dela.",
+    "method": [
+      {
+        "k": "quem faz",
+        "v": "engenheiro sênior, do desenho ao deploy"
+      },
+      {
+        "k": "como",
+        "v": "em etapas, você acompanha cada uma"
+      },
+      {
+        "k": "qualidade",
+        "v": "testes e revisão em toda entrega"
+      }
+    ],
+    "pillars": {
+      "clarity": {
+        "name": "Clareza",
+        "text": "Complexidade vira código claro e conversa sem jargão."
+      },
+      "delivery": {
+        "name": "Entrega",
+        "text": "Ideia no papel vira produto rodando, com qualidade que dá pra verificar."
+      },
+      "partnership": {
+        "name": "Parceria",
+        "text": "Postura de quem constrói junto, não de fornecedor que some depois da entrega."
+      }
+    }
   },
   "projects": {
-    "title": "Projetos selecionados",
-    "subtitle": "Cases reais de produtos que desenvolvi end-to-end como tech lead e founder.",
+    "title": "Cases",
+    "subtitle": "Produtos que construí de ponta a ponta, como tech lead e founder. Cada um mostra o problema, as decisões e o resultado.",
     "viewProject": "Ver detalhes",
-    "viewSource": "Código fonte",
-    "viewDemo": "Demo ao vivo",
-    "back": "Voltar"
+    "viewSource": "Código-fonte",
+    "viewDemo": "Ver ao vivo",
+    "back": "Voltar aos cases"
   },
   "experience": {
     "title": "Experiência",
-    "subtitle": "Trajetória construída em empresas de tecnologia, assessoria e comunidade.",
+    "subtitle": "Quem constrói é quem já operou produto em escala, prestou consultoria e ajudou outros líderes a crescer.",
     "present": "Atual",
     "roles": {}
   },
   "stack": {
-    "title": "Stack & ferramentas",
-    "subtitle": "Tecnologias que uso no dia a dia para entregar valor com qualidade.",
+    "title": "Stack",
+    "subtitle": "O que uso no dia a dia para entregar com qualidade.",
     "categories": {
-      "frontend": "Frontend",
-      "backend": "Backend & Cloud",
-      "data": "Dados & DevOps",
-      "practices": "Práticas"
+      "frontend": "frontend",
+      "backend": "backend & cloud",
+      "data": "dados & devops",
+      "practices": "práticas"
     }
   },
   "contact": {
-    "title": "Vamos construir algo juntos?",
-    "subtitle": "Se você quer trocar ideia, discutir uma oportunidade ou convidar para um podcast, me chame por qualquer canal.",
-    "email": "Email",
+    "titleA": "Tem um projeto no papel?",
+    "titleB": "Vamos tirar de lá.",
+    "subtitle": "Conte o problema, mesmo que ainda esteja rascunhado. Também converso sobre oportunidades, mentoria e podcasts.",
+    "email": "E-mail",
     "linkedin": "LinkedIn",
     "github": "GitHub",
     "whatsapp": "WhatsApp",
     "whatsappLabel": "Abrir conversa no WhatsApp"
   },
   "footer": {
-    "copyright": "© {year} Cezar Pretto. Todos os direitos reservados."
+    "tagline": "do papel ao produto.",
+    "copyright": "© {year} Cezar Pretto"
   }
 }

@@ -1,6 +1,7 @@
 import { setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import Hero from '@/components/hero';
+import Approach from '@/components/approach';
 import Projects from '@/components/projects';
 import Experience from '@/components/experience';
 import Stack from '@/components/stack';
@@ -27,6 +28,7 @@ export default async function HomePage({ params: { locale } }: HomePageProps) {
   return (
     <>
       <Hero />
+      <Approach />
       <Projects projects={projects} />
       <Experience />
       <Stack />

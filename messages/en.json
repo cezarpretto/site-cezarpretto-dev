@@ -1,58 +1,156 @@
 {
   "metadata": {
-    "title": "Cezar Pretto — Software Engineer",
-    "description": "Portfolio of Cezar Pretto: software engineer, currently Lead Software Engineer, building scalable digital products.",
-    "keywords": "Cezar Pretto, Software Engineer, Lead Software Engineer, Tech Lead, React, Next.js, Node.js"
+    "title": "Cezar Pretto — Custom software | from paper to product",
+    "description": "Cezar Pretto builds custom software for companies that want to take projects and products off the paper or solve problems with technology. Software engineer and Lead Software Engineer at Gupy.",
+    "keywords": "Cezar Pretto, custom software, software development, software engineer, Lead Software Engineer, Tech Lead, React, Next.js, Node.js"
   },
   "nav": {
-    "projects": "Projects",
+    "projects": "Cases",
     "experience": "Experience",
     "stack": "Stack",
-    "contact": "Contact"
+    "contact": "Talk to me",
+    "aria": "Main navigation",
+    "open": "Open menu",
+    "close": "Close menu",
+    "themeLight": "Switch to light theme",
+    "themeDark": "Switch to dark theme"
   },
   "hero": {
-    "greeting": "Hi, I'm",
-    "name": "Cezar Pretto",
-    "role": "Software Engineer",
-    "currentPosition": "Currently Lead Software Engineer at Gupy",
-    "intro": "I build scalable digital products, lead technical initiatives and turn complexity into clean code. I practice AI-assisted development with spec-driven development, purpose-built tooling, and objective quality gates.",
-    "ctaProjects": "View projects",
-    "ctaContact": "Get in touch"
+    "titleA": "From paper",
+    "titleB": "to product.",
+    "offer": "Custom software for your operation.",
+    "intro": "You show up with the idea, the stalled project, or the system that no longer keeps up with the business. I understand the problem, design the solution and ship it working, with you following every step.",
+    "ctaContact": "Talk about your project",
+    "ctaProjects": "See cases",
+    "meta": "Cezar Pretto · software engineer · partner and Lead Software Engineer at Gupy",
+    "caption": "Illustrative example: a technical proposal becomes a system in production as you scroll.",
+    "ruleFrom": "paper",
+    "ruleTo": "product",
+    "sheet": {
+      "label": "Technical proposal",
+      "title": "[your project]",
+      "for": "technical proposal for [your company]",
+      "rows": [
+        {
+          "k": "problem",
+          "v": "orders lost in WhatsApp"
+        },
+        {
+          "k": "scope",
+          "v": "portal + ERP"
+        },
+        {
+          "k": "timeline",
+          "v": "[N] weeks"
+        },
+        {
+          "k": "delivery",
+          "v": "weekly, in production"
+        }
+      ]
+    },
+    "panel": {
+      "title": "orders",
+      "nav": [
+        "orders",
+        "loads",
+        "statements"
+      ],
+      "orders": [
+        {
+          "id": "#1042",
+          "mid": "load 07:30",
+          "tag": "confirmed"
+        },
+        {
+          "id": "#1043",
+          "mid": "load 09:00",
+          "tag": "scheduled"
+        },
+        {
+          "id": "#1044",
+          "mid": "load 10:30",
+          "tag": "scheduled"
+        },
+        {
+          "id": "#1045",
+          "mid": "load 13:00",
+          "tag": "new"
+        }
+      ],
+      "weeks": "W",
+      "deploy": "deploy › in production"
+    },
+    "example": "illustrative example"
+  },
+  "approach": {
+    "title": "Whoever hires, hires a person.",
+    "body": "You talk directly to the person who designs and builds the system, from the first draft through delivery and after it.",
+    "method": [
+      {
+        "k": "who",
+        "v": "senior engineer, from design to deploy"
+      },
+      {
+        "k": "how",
+        "v": "in stages, you follow each one"
+      },
+      {
+        "k": "quality",
+        "v": "tests and review on every delivery"
+      }
+    ],
+    "pillars": {
+      "clarity": {
+        "name": "Clarity",
+        "text": "Complexity becomes clear code and a conversation without jargon."
+      },
+      "delivery": {
+        "name": "Delivery",
+        "text": "An idea on paper becomes a running product, with quality you can verify."
+      },
+      "partnership": {
+        "name": "Partnership",
+        "text": "The stance of someone who builds with you, not a vendor who disappears after delivery."
+      }
+    }
   },
   "projects": {
-    "title": "Selected projects",
-    "subtitle": "Real case studies of products I built end-to-end as tech lead and founder.",
+    "title": "Cases",
+    "subtitle": "Products I built end-to-end as tech lead and founder. Each one shows the problem, the decisions and the outcome.",
     "viewProject": "View details",
     "viewSource": "Source code",
-    "viewDemo": "Live demo",
-    "back": "Back"
+    "viewDemo": "View live",
+    "back": "Back to cases"
   },
   "experience": {
     "title": "Experience",
-    "subtitle": "A career path built across technology, advisory and community companies.",
+    "subtitle": "Built by someone who has run product at scale, done consulting and helped other leaders grow.",
     "present": "Present",
     "roles": {}
   },
   "stack": {
-    "title": "Stack & tools",
-    "subtitle": "Technologies I use daily to deliver value with quality.",
+    "title": "Stack",
+    "subtitle": "What I use day to day to deliver with quality.",
     "categories": {
-      "frontend": "Frontend",
-      "backend": "Backend & Cloud",
-      "data": "Data & DevOps",
-      "practices": "Practices"
+      "frontend": "frontend",
+      "backend": "backend & cloud",
+      "data": "data & devops",
+      "practices": "practices"
     }
   },
   "contact": {
-    "title": "Let's build something together?",
-    "subtitle": "If you want to exchange ideas, discuss an opportunity or invite me to a podcast, reach me on any channel.",
+    "titleA": "Got a project on paper?",
+    "titleB": "Let's get it off.",
+    "subtitle": "Tell me the problem, even if it is still a draft. I also talk about opportunities, mentoring and podcasts.",
     "email": "Email",
     "linkedin": "LinkedIn",
     "github": "GitHub",
     "whatsapp": "WhatsApp",
-    "whatsappLabel": "Open WhatsApp chat"
+    "whatsappLabel": "Open a WhatsApp chat"
   },
   "footer": {
-    "copyright": "© {year} Cezar Pretto. All rights reserved."
+    "tagline": "from paper to product.",
+    "copyright": "© {year} Cezar Pretto"
   }
 }
