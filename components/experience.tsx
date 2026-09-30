@@ -1,7 +1,6 @@
 import { useTranslations, useLocale } from 'next-intl';
 import Section from './section';
 import { experienceByLocale } from '@/lib/experience-data';
-import { Briefcase } from 'lucide-react';
 import type { Locale } from '@/i18n/routing';
 
 export default function Experience() {
@@ -10,39 +9,33 @@ export default function Experience() {
   const roles = experienceByLocale[locale] ?? experienceByLocale.pt;
 
   return (
-    <Section id="experience" ariaLabelledby="experience-title" className="bg-dracula-bg-soft/20">
-      <div className="max-w-2xl">
-        <h2
-          id="experience-title"
-          className="font-display text-3xl font-bold text-dracula-fg md:text-4xl"
-        >
-          {t('title')}
-        </h2>
-        <p className="mt-4 font-body text-lg text-dracula-fg-muted">{t('subtitle')}</p>
-      </div>
-
-      <div className="mt-12 space-y-8">
-        {roles.map((role, index) => (
-          <article
-            key={role.company}
-            className="animate-slide-up relative grid gap-4 rounded-xl border-l-4 border-dracula-purple bg-dracula-bg-soft/30 p-6 opacity-0 pl-8 transition-all hover:bg-dracula-bg-soft/60 md:grid-cols-[1fr_2fr]"
-            style={{ animationDelay: `${index * 0.1}s` }}
+    <Section id="experience" ariaLabelledby="experience-title">
+      <div className="grid gap-12 lg:grid-cols-[5fr_7fr] lg:gap-20">
+        <div className="lg:sticky lg:top-[calc(var(--header-h)+3rem)] lg:self-start">
+          <h2
+            id="experience-title"
+            className="text-[clamp(2.1rem,4.4vw,3.6rem)] font-semibold leading-[1.06] tracking-[-0.02em]"
           >
-            <div className="flex items-start gap-3">
-              <Briefcase className="mt-1 shrink-0 text-dracula-purple" size={20} />
-              <div>
-                <h3 className="font-display text-lg font-bold text-dracula-fg">
-                  {role.company}
-                </h3>
-                <p className="font-mono text-sm text-dracula-cyan">{role.role}</p>
-                <p className="mt-1 font-mono text-xs text-dracula-comment">{role.period}</p>
-              </div>
-            </div>
-            <p className="font-body leading-relaxed text-dracula-fg-muted md:pl-6">
-              {role.summary}
-            </p>
-          </article>
-        ))}
+            {t('title')}
+          </h2>
+          <p className="mt-6 max-w-[26rem] leading-[1.6] text-muted">{t('subtitle')}</p>
+        </div>
+
+        <ol className="ledger">
+          {roles.map((role) => {
+            const now = /Atual|Present/i.test(role.period);
+            return (
+              <li key={role.company} className={now ? 'ledger-item now' : 'ledger-item'}>
+                <p className="font-mono text-[0.8125rem] tnum text-muted">{role.period}</p>
+                <h3 className="mt-1.5 text-2xl font-semibold leading-tight">{role.company}</h3>
+                <p className="mt-1 text-sm font-medium text-accent">
+                  {role.role}
+                </p>
+                <p className="mt-3 max-w-[54ch] leading-[1.65] text-muted">{role.summary}</p>
+              </li>
+            );
+          })}
+        </ol>
       </div>
     </Section>
   );

@@ -1,15 +1,9 @@
 'use client';
 
-import { usePathname } from '@/i18n/navigation';
+import { usePathname, Link } from '@/i18n/navigation';
 import { useLocale } from 'next-intl';
-import { Link } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
 import type { Locale } from '@/i18n/routing';
-
-const labels: Record<Locale, string> = {
-  pt: 'PT',
-  en: 'EN',
-};
 
 export default function LocaleSwitcher() {
   const pathname = usePathname();
@@ -17,27 +11,27 @@ export default function LocaleSwitcher() {
 
   return (
     <div
-      className="flex items-center rounded-full border border-dracula-current bg-dracula-bg-soft p-1"
+      className="flex items-center gap-1 font-mono text-[0.8125rem] font-medium"
       role="group"
-      aria-label="Seletor de idioma"
+      aria-label="Idioma / Language"
     >
-      {(['pt', 'en'] as Locale[]).map((locale) => {
+      {(['pt', 'en'] as Locale[]).map((locale, i) => {
         const isActive = locale === currentLocale;
         return (
-          <Link
-            key={locale}
-            href={pathname || '/'}
-            locale={locale}
-            className={cn(
-              'rounded-full px-3 py-1 text-xs font-semibold transition-all',
-              isActive
-                ? 'bg-dracula-purple text-dracula-bg'
-                : 'text-dracula-fg-muted hover:text-dracula-fg'
-            )}
-            aria-current={isActive ? 'true' : undefined}
-          >
-            {labels[locale]}
-          </Link>
+          <span key={locale} className="flex items-center gap-1">
+            {i > 0 && <span className="text-line" aria-hidden="true">/</span>}
+            <Link
+              href={pathname || '/'}
+              locale={locale}
+              className={cn(
+                'rounded px-1 uppercase tracking-[0.12em] transition-colors',
+                isActive ? 'text-accent' : 'text-muted hover:text-fg'
+              )}
+              aria-current={isActive ? 'true' : undefined}
+            >
+              {locale}
+            </Link>
+          </span>
         );
       })}
     </div>

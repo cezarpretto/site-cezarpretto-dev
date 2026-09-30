@@ -12,10 +12,7 @@ export default function Section({ id, children, className, ariaLabelledby }: Sec
     <section
       id={id}
       aria-labelledby={ariaLabelledby}
-      className={cn(
-        'mx-auto max-w-6xl px-6 py-20 md:py-28',
-        className
-      )}
+      className={cn('mx-auto max-w-6xl px-6 py-24 md:py-32', className)}
     >
       {children}
     </section>

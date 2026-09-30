@@ -1,35 +1,36 @@
 import type { ReactNode } from 'react';
-import { Space_Grotesk, IBM_Plex_Sans, JetBrains_Mono } from 'next/font/google';
+import { IBM_Plex_Sans, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 
-const spaceGrotesk = Space_Grotesk({
+const plex = IBM_Plex_Sans({
   subsets: ['latin'],
-  variable: '--font-space-grotesk',
+  weight: ['400', '500', '600'],
+  variable: '--font-plex',
   display: 'swap',
 });
 
-const ibmPlexSans = IBM_Plex_Sans({
+const mono = JetBrains_Mono({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-ibm-plex-sans',
+  weight: ['400', '500', '700', '800'],
+  variable: '--font-mono',
   display: 'swap',
 });
 
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ['latin'],
-  variable: '--font-jetbrains-mono',
-  display: 'swap',
-});
+// Tema escuro (Tinta) por padrão; o toggle grava a escolha. Roda antes da pintura para não piscar.
+const themeScript = `try{var t=localStorage.getItem('cp-theme');document.documentElement.dataset.theme=t==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}`;
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="pt"
-      className={`${spaceGrotesk.variable} ${ibmPlexSans.variable} ${jetbrainsMono.variable}`}
+      data-theme="dark"
+      suppressHydrationWarning
+      className={`${plex.variable} ${mono.variable}`}
     >
-      <body className="min-h-screen bg-dracula-bg text-dracula-fg antialiased">
-        {children}
-      </body>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
+      <body className="min-h-screen bg-bg font-sans text-fg antialiased">{children}</body>
     </html>
   );
 }
